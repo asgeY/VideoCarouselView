@@ -8,10 +8,16 @@
 import SwiftUI
 
 @main
-struct VideoCarouselViewApp: App {
+struct VideoCarouselApp: App {
+    @StateObject private var videoData = VideoData(loadData: loadVideoData)
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            VideoCarouselView(videoURLs: videoData.videos.map { URL(string: $0.url)! })
+                .environmentObject(videoData)
         }
     }
 }
+
+
+
